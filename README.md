@@ -1,0 +1,4 @@
+# calculadoraRMI
+
+- Python, Pyro
+- Tkinter
