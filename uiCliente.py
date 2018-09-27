@@ -1,9 +1,12 @@
+import Pyro4
 import tkinter as Tk
+
+calc = Pyro4.Proxy("PYRONAME:calculadoraTop") 
 
 
 class Calculator:
     ''' main class that constructs the calc and preforms the calculations '''
-
+     
     def __init__(self, master):
         # Global variables needed throughout a single calculation
         self.top_string = ''    # string for label at top of calculator
@@ -102,19 +105,19 @@ class Calculator:
         ''' Triggers calculation then clears all vars '''
         total = 0
         if self.add is True:
-            total = self.number1 + self.number2
+            total = calc.somar(self.number1, self.number2)
             self.number2 = 0    # resets for next calculation if clear is not presses
 
         elif self.subtract is True:
-            total = self.number1 - self.number2
+            total = calc.subtrair(self.number1, self.number2)
             self.number2 = 0
 
         elif self.multiply is True:
-            total = self.number1 * self.number2
+            total = calc.multiplicar(self.number1, self.number2)
             self.number2 = 0
 
         elif self.divide is True:
-            total = round(self.number1 / self.number2, 3)
+            total = calc.dividir(self.number1, self.number2)
             total = int(total) if total.is_integer() else total
             self.number2 = 0
 
